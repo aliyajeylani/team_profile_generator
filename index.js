@@ -7,7 +7,7 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 
 
-const questions = [
+const managerQuestions = [
     {
         type: 'input',
         message: "What is the team manager's name?",
@@ -23,7 +23,7 @@ const questions = [
     {
         type: 'input',
         message: "What is the team manager's email?",
-        name: 'imanager_email',
+        name: 'manager_email',
 
     },
     {
@@ -33,12 +33,19 @@ const questions = [
 
     },
 
+]
+
+const teamQuestion = [
     {
         type: 'list',
         message: "Whic type of team member would you like to add?",
-        choices: ["Engineer", "Intern"],
+        choices: ["Engineer", "Intern", "None"],
         name: 'team_member',
-    },
+    }
+]
+
+const engineerQuestions = [
+
     {
         type: 'input',
         message: "What is your engineer's name?",
@@ -62,7 +69,11 @@ const questions = [
         type: 'input',
         message: "What is your engineer's Github username?",
         name: 'engineer_github_name',
-    },
+    }
+
+]
+const internQuestions = [
+
     {
         type: 'input',
         message: "What is your intern's name?",
@@ -89,5 +100,76 @@ const questions = [
     },
 
 
-
 ]
+
+
+function writeToFile(file, data) {
+
+    fs.writeFile(file, JSON.stringify(data), (err) =>
+        err ? console.log(err) : console.log('Success'));
+
+};
+
+const employeeArray = [];
+
+function init() {
+    inquirer.prompt(managerQuestions)
+        .then(response => {
+            console.log(response);
+            const manager = new Manager(
+                response.manager_name,
+                response.manager_id,
+                response.manager_email,
+                response.manager_number);
+            employeeArray.push(manager)
+
+            repeatTeamQuestion();
+
+
+        })
+
+
+
+}
+
+init();
+
+function repeatTeamQuestion() {
+
+    inquirer.prompt(teamQuestion)
+        .then(response => {
+            console.log(response);
+
+            if (response.team_member == "Engineer") {
+
+                inquirer.prompt(engineerQuestions)
+                    .then(response => {
+                        const engineer = new Engineer(
+                            response.engineer_name,
+                            response.engineer_id,
+                            response.engineer_email,
+                            response.engineer_github_name);
+                        employeeArray.push(engineer)
+                        repeatTeamQuestion();
+                    })
+            } else if (response.team_member == "Intern") {
+                inquirer.prompt(internQuestions)
+                    .then(response => {
+                        const intern = new Intern(
+                            response.intern_name,
+                            response.intern_id,
+                            response.intern_email,
+                            response.intern_school_name);
+                        employeeArray.push(intern)
+                        repeatTeamQuestion();
+                    })
+            } else {
+                writeToFile("index.html", employeeArray);
+                return;
+            }
+
+
+
+        })
+
+}
