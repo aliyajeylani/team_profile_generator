@@ -3,6 +3,7 @@ const Engineer = require("./lib/engineer");
 const Manager = require("./lib/manager");
 const Intern = require("./lib/intern");
 
+const team = require("./src/templatehtml");
 const inquirer = require("inquirer");
 const fs = require("fs");
 
@@ -123,6 +124,7 @@ function init() {
                 response.manager_number);
             employeeArray.push(manager)
 
+
             repeatTeamQuestion();
 
 
@@ -140,6 +142,7 @@ function repeatTeamQuestion() {
         .then(response => {
             console.log(response);
 
+
             if (response.team_member == "Engineer") {
 
                 inquirer.prompt(engineerQuestions)
@@ -150,6 +153,8 @@ function repeatTeamQuestion() {
                             response.engineer_email,
                             response.engineer_github_name);
                         employeeArray.push(engineer)
+
+
                         repeatTeamQuestion();
                     })
             } else if (response.team_member == "Intern") {
@@ -160,11 +165,12 @@ function repeatTeamQuestion() {
                             response.intern_id,
                             response.intern_email,
                             response.intern_school_name);
-                        employeeArray.push(intern)
+
                         repeatTeamQuestion();
                     })
             } else {
                 writeToFile("index.html", employeeArray);
+                console.log(employeeArray);
                 return;
             }
 
@@ -173,3 +179,4 @@ function repeatTeamQuestion() {
         })
 
 }
+
