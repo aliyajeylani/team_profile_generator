@@ -29,7 +29,7 @@ function createIntern(intern) {
                 <ul class="list-group">
                     <li class="list-group-item">ID: ${intern.id}</li>
                     <li class="list-group-item">
-                        Email: <a href="mailto:${intern.email}">${manager.email}</a>
+                        Email: <a href="mailto:${intern.email}">${intern.email}</a>
                     </li>
                     <li class="list-group-item">School: ${intern.school}</li>
                 </ul>
@@ -48,7 +48,7 @@ function createEngineer(engineer) {
                 <ul class="list-group">
                     <li class="list-group-item">ID: ${engineer.id}</li>
                     <li class="list-group-item">
-                        Email: <a href="mailto:${engineer.email}">${manager.email}</a>
+                        Email: <a href="mailto:${engineer.email}">${engineer.email}</a>
                     </li>
                     <li class="list-group-item">
                     GitHub: <a href="https://github.com/${engineer.gitHub}"</li>
@@ -151,4 +151,4 @@ function generateHTML(employeeCards) {
 
 
 
-module.export = generatePage;
+module.exports = generatePage;
