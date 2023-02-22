@@ -3,7 +3,8 @@ const Engineer = require("./lib/engineer");
 const Manager = require("./lib/manager");
 const Intern = require("./lib/intern");
 
-const team = require("./src/templatehtml");
+const generatePage = require("./src/templatehtml")
+// const team = require("./src/templatehtml");
 const inquirer = require("inquirer");
 const fs = require("fs");
 
@@ -106,7 +107,7 @@ const internQuestions = [
 
 function writeToFile(file, data) {
 
-    fs.writeFile(file, JSON.stringify(data), (err) =>
+    fs.writeFile(file, generatePage(employeeArray), (err) =>
         err ? console.log(err) : console.log('Success'));
 
 };
