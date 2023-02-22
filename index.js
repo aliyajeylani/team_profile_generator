@@ -4,7 +4,6 @@ const Manager = require("./lib/manager");
 const Intern = require("./lib/intern");
 
 const generatePage = require("./src/templatehtml")
-// const team = require("./src/templatehtml");
 const inquirer = require("inquirer");
 const fs = require("fs");
 
@@ -107,7 +106,7 @@ const internQuestions = [
 
 function writeToFile(file, data) {
 
-    fs.writeFile(file, generatePage(employeeArray), (err) =>
+    fs.writeFile(file, generatePage(data), (err) =>
         err ? console.log(err) : console.log('Success'));
 
 };
@@ -166,12 +165,15 @@ function repeatTeamQuestion() {
                             response.intern_id,
                             response.intern_email,
                             response.intern_school_name);
+                        employeeArray.push(intern);
 
                         repeatTeamQuestion();
                     })
             } else {
-                writeToFile("index.html", employeeArray);
                 console.log(employeeArray);
+                console.log(employeeArray.length);
+                writeToFile("index.html", employeeArray);
+
                 return;
             }
 

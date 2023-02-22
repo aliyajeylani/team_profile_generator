@@ -59,10 +59,54 @@ function createEngineer(engineer) {
 }
 
 
+//Function to gather data from user input and into functions above
+
+function generatePage(data) {
+
+    employeeCardArray = [];
+
+    for (let i = 0; i < data.length; i++) {
+
+        const employee = data[i];
+        const role = employee.getRole();
 
 
+        if (role === 'Manager') {
 
-function generateHTML(createTeam) {
+            const managerCard = createManager(employee);
+
+            employeeCardArray.push(managerCard);
+        }
+
+        if (role === 'Engineer') {
+
+            const engineerCard = createEngineer(employee);
+
+            employeeCardArray.push(engineerCard);
+
+        }
+
+        if (role === 'Intern') {
+
+            const internCard = createIntern(employee);
+
+            employeeCardArray.push(internCard);
+        }
+    }
+
+    //Joins all employee cards into an array
+    const employeeCards = employeeCardArray.join("");
+
+    //Generate html page with employee cards
+
+    const generateTeamPage = generateHTML(employeeCards);
+    return generateTeamPage;
+
+
+}
+
+
+function generateHTML(employeeCards) {
     return `<!DOCTYPE html>
         <html lang="en">
 
@@ -82,7 +126,7 @@ function generateHTML(createTeam) {
         </header>
 
         <main>
-        ${createTeam};
+        ${employeeCards};
         </main>
 
 
@@ -94,14 +138,17 @@ function generateHTML(createTeam) {
 }
 
 
-function generatePage(data) {
-
-    employeeCardArray = [];
 
 
 
 
-}
+
+
+
+
+
+
+
 
 
 module.export = generatePage;
