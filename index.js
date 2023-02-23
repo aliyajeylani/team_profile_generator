@@ -3,6 +3,7 @@ const Engineer = require("./lib/engineer");
 const Manager = require("./lib/manager");
 const Intern = require("./lib/intern");
 
+
 const generatePage = require("./src/templatehtml")
 const inquirer = require("inquirer");
 const fs = require("fs");
@@ -30,7 +31,7 @@ const managerQuestions = [
     {
         type: 'input',
         message: "What is the team manager's office number?",
-        name: 'manager_number',
+        name: 'manager_officeNumber',
 
     },
 
@@ -69,7 +70,7 @@ const engineerQuestions = [
     {
         type: 'input',
         message: "What is your engineer's Github username?",
-        name: 'engineer_github_name',
+        name: 'engineer_github',
     }
 
 ]
@@ -97,7 +98,7 @@ const internQuestions = [
     {
         type: 'input',
         message: "What is your intern's school name?",
-        name: 'intern_school_name',
+        name: 'intern_school',
     },
 
 
@@ -121,7 +122,7 @@ function init() {
                 response.manager_name,
                 response.manager_id,
                 response.manager_email,
-                response.manager_number);
+                response.manager_officeNumber);
             employeeArray.push(manager)
 
 
@@ -151,7 +152,7 @@ function repeatTeamQuestion() {
                             response.engineer_name,
                             response.engineer_id,
                             response.engineer_email,
-                            response.engineer_github_name);
+                            response.engineer_github);
                         employeeArray.push(engineer)
 
 
@@ -164,7 +165,7 @@ function repeatTeamQuestion() {
                             response.intern_name,
                             response.intern_id,
                             response.intern_email,
-                            response.intern_school_name);
+                            response.intern_school);
                         employeeArray.push(intern);
 
                         repeatTeamQuestion();
@@ -172,7 +173,7 @@ function repeatTeamQuestion() {
             } else {
                 console.log(employeeArray);
                 console.log(employeeArray.length);
-                writeToFile("index.html", employeeArray);
+                writeToFile("./dist/index.html", employeeArray);
 
                 return;
             }

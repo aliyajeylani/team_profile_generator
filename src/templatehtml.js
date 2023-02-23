@@ -4,7 +4,7 @@ function createManager(manager) {
     return `<div class='card'>
     <div class='card-header'>
         <h2 class='card-title'>${manager.name}</h2>
-        <h3 class="card-title">${manager.role}</h3>
+        <h3 class="card-title">${manager.getRole()}</h3>
     </div>
         <div class="card-body">
                 <ul class="list-group">
@@ -12,7 +12,7 @@ function createManager(manager) {
                     <li class="list-group-item">
                         Email: <a href="mailto:${manager.email}">${manager.email}</a>
                     </li>
-                    <li class="list-group-item">Office number: ${manager.officeNumber}</li>
+                    <li class="list-group-item">Office number: ${manager.getNumber()}</li>
                 </ul>
             </div>
         </div>`
@@ -23,7 +23,7 @@ function createIntern(intern) {
     return `<div class='card'>
     <div class='card-header'>
         <h2 class='card-title'>${intern.name}</h2>
-        <h3 class="card-title">${intern.role}</h3>
+        <h3 class="card-title">${intern.getRole()}</h3>
     </div>
         <div class="card-body">
                 <ul class="list-group">
@@ -31,7 +31,7 @@ function createIntern(intern) {
                     <li class="list-group-item">
                         Email: <a href="mailto:${intern.email}">${intern.email}</a>
                     </li>
-                    <li class="list-group-item">School: ${intern.school}</li>
+                    <li class="list-group-item">School: ${intern.getSchool()}</li>
                 </ul>
             </div>
         </div>`
@@ -42,7 +42,7 @@ function createEngineer(engineer) {
     return `<div class='card'>
     <div class='card-header'>
         <h2 class='card-title'>${engineer.name}</h2>
-        <h3 class="card-title">${engineer.role}</h3>
+        <h3 class="card-title">${engineer.getRole()}</h3>
     </div>
         <div class="card-body">
                 <ul class="list-group">
@@ -51,7 +51,7 @@ function createEngineer(engineer) {
                         Email: <a href="mailto:${engineer.email}">${engineer.email}</a>
                     </li>
                     <li class="list-group-item">
-                    GitHub: <a href="https://github.com/${engineer.gitHub}"</li>
+                    GitHub: <a href="https://github.com/${engineer.getGitHub()}">${engineer.getGitHub()}</a></li>
                 </ul>
             </div>
         </div>`
@@ -126,7 +126,7 @@ function generateHTML(employeeCards) {
         </header>
 
         <main>
-        ${employeeCards};
+        ${employeeCards}
         </main>
 
 
